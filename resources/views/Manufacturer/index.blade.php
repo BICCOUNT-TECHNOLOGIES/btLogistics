@@ -3,123 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="manufacturer/styles.css"> 
+  <link rel="stylesheet" href="manufacturer/styles.css">
   <title>Murram Road Division</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* Sidebar Styles */
-    .sidebar {
-      width: 250px;
-      background-color: #f8f9fa;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      padding: 20px;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    }
 
-    .sidebar .add-material-btn {
-      width: 100%;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .sidebar .add-material-btn:hover {
-      background-color: #0056b3;
-    }
-
-    /* Header Styles */
-    .header {
-      padding: 20px;
-      background-color: #14c4e7;
-      color: white;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
-
-    /* Modal/Overlay Styles */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .uploadContainer {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 50%;
-      max-width: 600px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      text-align: center;
-    }
-
-    .close-overlay {
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-
-    .close-overlay:hover {
-      background-color: #c82333;
-    }
-
-    .upload-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-      justify-content: center;
-    }
-
-    .upload-item {
-      width: 150px;
-      height: 150px;
-      border: 2px dashed #007bff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      cursor: pointer;
-      background-color: #f8f9fa;
-    }
-
-    .upload-item img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: cover;
-    }
-
-    .upload-item .close {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: red;
-      color: white;
-      padding: 5px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
@@ -136,12 +25,12 @@
     </div>
     <div class="profile">
       <img src="https://via.placeholder.com/40" alt="Profile Picture" class="profile-pic">
-      <span class="profile-name">John Doe</span>
+      <span class="profile-name">{{ Auth::user()->name }}!</span>
     </div>
   </header>
 
 
- 
+
 
   <!-- Overlay -->
   <div class="overlay" id="overlay">
@@ -275,7 +164,7 @@
     alert(`Description: ${description}, Price: ${price}, Images Uploaded!`);
     // You can submit form data via AJAX here to your server or handle it accordingly
   }
-   
+
   </script>
 </body>
 </html>
