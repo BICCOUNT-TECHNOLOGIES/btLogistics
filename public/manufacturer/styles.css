@@ -7,7 +7,7 @@ body {
   
   /* Header styling */
   header {
-    background-color: #14c4e7;
+    background-color:  #007FFF;
     padding: 15px 0;
     color: white;
   }
@@ -156,9 +156,10 @@ body {
   body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
-    padding-top: 50px;
-  }
+    padding-top: 20px; */
   
+  }
+   
   .container {
     max-width: 600px;
     margin: 0 auto;
@@ -265,5 +266,5 @@ body {
   .btn-submit:hover {
     background-color: #218838;
   }
-  
+
   /* the upload image styles */

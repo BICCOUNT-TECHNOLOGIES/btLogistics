@@ -12,7 +12,7 @@
       width: 250px;
       background-color: #f8f9fa;
       position: fixed;
-      top: 0;
+      top: 20%;
       left: 0;
       height: 100%;
       padding: 20px;
@@ -36,8 +36,8 @@
 
     /* Header Styles */
     .header {
-      padding: 20px;
-      background-color: #14c4e7;
+      padding: 50px;
+      background-color: #007FFF;
       color: white;
       display: flex;
       justify-content: flex-end;
@@ -120,23 +120,96 @@
       border-radius: 50%;
       cursor: pointer;
     }
+    .header .logo img {
+    height: 100px;
+    width: 100px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 25px; /* Adds padding to the header */
+    background-color: #007FFF;
+    color: white;
+  }
+
+  /* Logo Styles */
+  .logo {
+    margin-right: auto; /* Pushes the other elements to the right */
+  }
+
+  .logo img {
+    max-height: 90px; /* Restrict logo height */
+    margin-right: 20px; /* Add some space to the right of the logo */
+  }
+
+  /* Notification Icon Styles */
+  .notification-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Add some space to the right */
+  }
+
+  .notification-icon .icon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+
+  .notification-icon .badge {
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+  }
+
+  /* Profile Styles */
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-pic {
+    border-radius: 50%;
+    margin-right: 10px; /* Adds space between the profile image and name */
+    height: 40px;
+    width: 40px;
+  }
+
+  .profile-name {
+    font-size: 16px;
+  }
+
+
+
   </style>
 </head>
 <body>
   <!-- Sidebar -->
   <div class="sidebar">
+
+  
+
     <button class="add-material-btn" onclick="showUploadContainer()">Add Material</button>
   </div>
 
   <!-- Header -->
   <header class="header">
+    
+    <div class="logo">
+      <img src="{{ asset('storage/images/logo.png') }}" alt="BICCOUNT GROUP Logo" />
+    </div>
+
     <div class="notification-icon">
       <span class="icon">🔔</span>
       <span class="badge">3</span>
     </div>
+
+
     <div class="profile">
       <img src="https://via.placeholder.com/40" alt="Profile Picture" class="profile-pic">
-      <span class="profile-name">John Doe</span>
+      <span class="profile-name"></span>
     </div>
   </header>
 
