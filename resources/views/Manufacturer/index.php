@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="manufacturer/styles.css"> 
   <title>Murram Road Division</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -141,7 +141,7 @@
   </header>
 
 
-
+ 
 
   <!-- Overlay -->
   <div class="overlay" id="overlay">
@@ -275,7 +275,7 @@
     alert(`Description: ${description}, Price: ${price}, Images Uploaded!`);
     // You can submit form data via AJAX here to your server or handle it accordingly
   }
-
+   
   </script>
 </body>
 </html>

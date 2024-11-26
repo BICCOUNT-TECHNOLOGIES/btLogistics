@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\registerLogin;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\manufacturerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +22,23 @@ Route::get('/', function () {
 });
 
 Route::get('/about', [homeController::class, 'about'])->name('about');
+Route::get('/about', [homeController::class, 'about'])->name('about');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+//  Route::get('/dashboard', [manufacturerController::class, 'index'])
+//  ->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Route::get('/client/dashboard', [ClientDashboardController::class, 'index'])->name('client.dashboard');
+    Route::get('/dashboard', [manufacturerController::class, 'index'])->name('dashboard');
+    // Route::get('/supplier/dashboard', [SupplierDashboardController::class, 'index'])->name('supplier.dashboard');
+});
+
+
+// Route::get('/dashboard', [registerLogin::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

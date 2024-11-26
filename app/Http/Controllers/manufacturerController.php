@@ -7,4 +7,7 @@ use Illuminate\Http\Request;
 class manufacturerController extends Controller
 {
     //
+    public function index(){
+        return view('Manufacturer.index');
+    }
 }

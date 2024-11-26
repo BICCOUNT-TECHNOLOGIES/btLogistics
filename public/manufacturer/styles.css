@@ -1,0 +1,269 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header styling */
+  header {
+    background-color: #14c4e7;
+    padding: 15px 0;
+    color: white;
+  }
+  
+  .header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .notification-icon {
+    position: relative;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  
+  .notification-icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color:rgb(0, 0, 0);
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .profile img {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .profile-name {
+    font-weight: bold;
+  }
+  
+  /* Murram Road Division Section */
+  .murram-division {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+  }
+  
+  .murram-division h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  .murram-division p {
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Image Upload Section */
+  .upload-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .upload-item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+  }
+  
+  .upload-item img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .description-btn {
+    margin-top: 10px;
+    background-color: #14c4e7;
+    border: none;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .description-btn:hover {
+    background-color: #218838;
+  }
+  
+  /* Image Upload New Section */
+  .upload-new-image {
+    margin-top: 40px;
+  }
+  
+  .upload-new-image label {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  
+  .upload-new-image label:hover {
+    background-color: #0056b3;
+  }
+  
+  .upload-new-image input[type="file"] {
+    display: none;
+  }
+  
+  .upload-new-image button {
+    font-size: 16px;
+    background-color: #14c4e7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .upload-new-image button:hover {
+    background-color: #218838;
+  }
+  
+  .upload-new-image #image-preview {
+    margin-top: 20px;
+  }
+  
+  .upload-new-image img {
+    border-radius: 8px;
+  }
+  
+  
+  /* the upload image styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding-top: 50px;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  .upload-section {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .upload-item {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .upload-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .upload-item input {
+    display: none;
+  }
+  
+  .upload-item .icon {
+    font-size: 30px;
+    color: #007bff;
+  }
+  
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    color: red;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    padding: 3px;
+  }
+  
+  .add-image-btn {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .add-image-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-submit {
+    display: block;
+    width: 100%;
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    margin-top: 20px;
+  }
+  
+  .btn-submit:hover {
+    background-color: #218838;
+  }
+  
+  /* the upload image styles */
