@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="manufacturer/styles.css"> 
+  <link rel="stylesheet" href="manufacturer/styles.css">
   <title>Murram Road Division</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* Sidebar Styles */
+
     .sidebar {
       width: 250px;
       background-color: #f8f9fa;
@@ -183,6 +184,7 @@
 
 
 
+
   </style>
 </head>
 <body>
@@ -210,11 +212,11 @@
     <div class="profile">
       <img src="https://via.placeholder.com/40" alt="Profile Picture" class="profile-pic">
       <span class="profile-name">{{Auth::user() ->name}}!</span>
-    </div>
+
   </header>
 
 
- 
+
 
   <!-- Overlay -->
   <div class="overlay" id="overlay">
@@ -348,7 +350,7 @@
     alert(`Description: ${description}, Price: ${price}, Images Uploaded!`);
     // You can submit form data via AJAX here to your server or handle it accordingly
   }
-   
+
   </script>
 </body>
 </html>
