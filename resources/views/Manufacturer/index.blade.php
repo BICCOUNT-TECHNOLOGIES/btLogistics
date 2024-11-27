@@ -209,7 +209,7 @@
 
     <div class="profile">
       <img src="https://via.placeholder.com/40" alt="Profile Picture" class="profile-pic">
-      <span class="profile-name"></span>
+      <span class="profile-name">{{Auth::user() ->name}}!</span>
     </div>
   </header>
 
