@@ -9,24 +9,210 @@
   <style>
     /* Sidebar Styles */
 
+    .sidebar {
+      width: 250px;
+      background-color: #f8f9fa;
+      position: fixed;
+      top: 20%;
+      left: 0;
+      height: 100%;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar .add-material-btn {
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .sidebar .add-material-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Header Styles */
+    .header {
+      padding: 50px;
+      background-color: #007FFF;
+      color: white;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    /* Modal/Overlay Styles */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .uploadContainer {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 50%;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .close-overlay {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .close-overlay:hover {
+      background-color: #c82333;
+    }
+
+    .upload-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .upload-item {
+      width: 150px;
+      height: 150px;
+      border: 2px dashed #007bff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      background-color: #f8f9fa;
+    }
+
+    .upload-item img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+
+    .upload-item .close {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: red;
+      color: white;
+      padding: 5px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .header .logo img {
+    height: 100px;
+    width: 100px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 25px; /* Adds padding to the header */
+    background-color: #007FFF;
+    color: white;
+  }
+
+  /* Logo Styles */
+  .logo {
+    margin-right: auto; /* Pushes the other elements to the right */
+  }
+
+  .logo img {
+    max-height: 90px; /* Restrict logo height */
+    margin-right: 20px; /* Add some space to the right of the logo */
+  }
+
+  /* Notification Icon Styles */
+  .notification-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Add some space to the right */
+  }
+
+  .notification-icon .icon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+
+  .notification-icon .badge {
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+  }
+
+  /* Profile Styles */
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-pic {
+    border-radius: 50%;
+    margin-right: 10px; /* Adds space between the profile image and name */
+    height: 40px;
+    width: 40px;
+  }
+
+  .profile-name {
+    font-size: 16px;
+  }
+
+
+
+
   </style>
 </head>
 <body>
   <!-- Sidebar -->
   <div class="sidebar">
+
+  
+
     <button class="add-material-btn" onclick="showUploadContainer()">Add Material</button>
   </div>
 
   <!-- Header -->
   <header class="header">
+    
+    <div class="logo">
+      <img src="{{ asset('storage/images/logo.png') }}" alt="BICCOUNT GROUP Logo" />
+    </div>
+
     <div class="notification-icon">
       <span class="icon">🔔</span>
       <span class="badge">3</span>
     </div>
+
+
     <div class="profile">
       <img src="https://via.placeholder.com/40" alt="Profile Picture" class="profile-pic">
-      <span class="profile-name">{{ Auth::user()->name }}!</span>
-    </div>
+      <span class="profile-name">{{Auth::user() ->name}}!</span>
+
   </header>
 
   
