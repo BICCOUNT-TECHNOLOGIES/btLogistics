@@ -13,7 +13,7 @@
       width: 250px;
       background-color: #f8f9fa;
       position: fixed;
-      top: 20%;
+      top: 12%;
       left: 0;
       height: 100%;
       padding: 20px;
@@ -191,14 +191,14 @@
   <!-- Sidebar -->
   <div class="sidebar">
 
-  
+
 
     <button class="add-material-btn" onclick="showUploadContainer()">Add Material</button>
   </div>
 
   <!-- Header -->
   <header class="header">
-    
+
     <div class="logo">
       <img src="{{ asset('storage/images/logo.png') }}" alt="BICCOUNT GROUP Logo" />
     </div>
@@ -215,7 +215,7 @@
 
   </header>
 
-  
+
 
 
 
