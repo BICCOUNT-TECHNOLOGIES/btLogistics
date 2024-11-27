@@ -191,14 +191,14 @@
   <!-- Sidebar -->
   <div class="sidebar">
 
-  
+
 
     <button class="add-material-btn" onclick="showUploadContainer()">Add Material</button>
   </div>
 
   <!-- Header -->
   <header class="header">
-    
+
     <div class="logo">
       <img src="{{ asset('storage/images/logo.png') }}" alt="BICCOUNT GROUP Logo" />
     </div>
@@ -214,6 +214,8 @@
       <span class="profile-name">{{Auth::user() ->name}}!</span>
 
   </header>
+
+
 
 
 
