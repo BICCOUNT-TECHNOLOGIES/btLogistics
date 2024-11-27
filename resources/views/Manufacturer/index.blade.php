@@ -13,7 +13,7 @@
       width: 250px;
       background-color: #f8f9fa;
       position: fixed;
-      top: 20%;
+      top: 17%;
       left: 0;
       height: 100%;
       padding: 20px;
