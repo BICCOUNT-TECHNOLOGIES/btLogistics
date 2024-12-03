@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            
-            $table->unsignedBigInteger('materials_id'); 
-        
-            $table->foreign('materials_id')->references('id')->on('materials');
-            $table->string('imagepath');
-            $table->timestamps();
+        Schema::table('materials', function (Blueprint $table) {
+            //
+            $table->dropColumn('manufacturer_id');
         });
     }
 
@@ -28,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('materials', function (Blueprint $table) {
+            //
+            $table->unsignedBigInteger('manufacturer_id')->nullable();
+        });
     }
 };

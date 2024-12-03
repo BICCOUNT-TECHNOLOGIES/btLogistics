@@ -8,7 +8,6 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* Sidebar Styles */
-
     .sidebar {
       width: 250px;
       background-color: #f8f9fa;
@@ -67,6 +66,7 @@
       max-width: 600px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       text-align: center;
+      position: relative;
     }
 
     .close-overlay {
@@ -85,120 +85,136 @@
       background-color: #c82333;
     }
 
-    .upload-section {
+    .header .logo img {
+      height: 100px;
+      width: 100px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 25px;
+      background-color: #007FFF;
+      color: white;
+    }
+
+    /* Logo Styles */
+    .logo {
+      margin-right: auto;
+    }
+
+    .logo img {
+      max-height: 90px;
+      margin-right: 20px;
+    }
+
+    /* Notification Icon Styles */
+    .notification-icon {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+
+    .notification-icon .icon {
+      font-size: 20px;
+      margin-right: 5px;
+    }
+
+    .notification-icon .badge {
+      background-color: red;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 50%;
+      font-size: 12px;
+    }
+
+    /* Profile Styles */
+    .profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-pic {
+      border-radius: 50%;
+      margin-right: 10px;
+      height: 40px;
+      width: 40px;
+    }
+
+    .profile-name {
+      font-size: 16px;
+    }
+
+    /* Multiple Image Preview Styles */
+    #multiple-image-preview-container {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 10px;
       justify-content: center;
     }
 
-    .upload-item {
-      width: 150px;
-      height: 150px;
-      border: 2px dashed #007bff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .image-preview-wrapper {
       position: relative;
-      cursor: pointer;
-      background-color: #f8f9fa;
+      margin: 5px;
+      text-align: center;
     }
 
-    .upload-item img {
-      max-width: 100%;
-      max-height: 100%;
+    .image-preview-wrapper img {
+      max-width: 150px;
+      max-height: 150px;
       object-fit: cover;
+      border: 1px solid #ddd;
+      border-radius: 5px;
     }
 
-    .upload-item .close {
+    .remove-image {
       position: absolute;
       top: 5px;
       right: 5px;
-      background: red;
+      background: rgba(255,0,0,0.7);
       color: white;
-      padding: 5px;
+      border: none;
       border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .add-image-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-left: 10px;
       cursor: pointer;
     }
-    .header .logo img {
-    height: 100px;
-    width: 100px;
-  }
 
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 25px; /* Adds padding to the header */
-    background-color: #007FFF;
-    color: white;
-  }
+    .add-image-btn:hover {
+      background-color: #218838;
+    }
 
-  /* Logo Styles */
-  .logo {
-    margin-right: auto; /* Pushes the other elements to the right */
-  }
-
-  .logo img {
-    max-height: 90px; /* Restrict logo height */
-    margin-right: 20px; /* Add some space to the right of the logo */
-  }
-
-  /* Notification Icon Styles */
-  .notification-icon {
-    display: flex;
-    align-items: center;
-    margin-right: 20px; /* Add some space to the right */
-  }
-
-  .notification-icon .icon {
-    font-size: 20px;
-    margin-right: 5px;
-  }
-
-  .notification-icon .badge {
-    background-color: red;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-size: 12px;
-  }
-
-  /* Profile Styles */
-  .profile {
-    display: flex;
-    align-items: center;
-  }
-
-  .profile-pic {
-    border-radius: 50%;
-    margin-right: 10px; /* Adds space between the profile image and name */
-    height: 40px;
-    width: 40px;
-  }
-
-  .profile-name {
-    font-size: 16px;
-  }
-
-
-
-
+    .image-upload-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
   <!-- Sidebar -->
   <div class="sidebar">
-
-
-
     <button class="add-material-btn" onclick="showUploadContainer()">Add Material</button>
   </div>
 
   <!-- Header -->
   <header class="header">
-
     <div class="logo">
       <img src="{{ asset('storage/images/logo.png') }}" alt="BICCOUNT GROUP Logo" />
     </div>
@@ -208,52 +224,81 @@
       <span class="badge">3</span>
     </div>
 
-
     <div class="profile">
-      <img src="https://via.placeholder.com/40" alt="Profile Picture" class="profile-pic">
-      <span class="profile-name">{{Auth::user() ->name}}!</span>
 
+      <img src="{{ auth()->user()->profile_picture_url }}" alt="Profile Picture">
+      <span class="profile-name">{{Auth::user()->name}}!</span>
+    </div>
   </header>
 
+<div class="images" style="margin-left: 40vw">
+  
+  @foreach($materials as $material)
+  <div class="material">
+      <h2>{{ $material->name }}</h2>
+      
+      <div class="images">
+          @foreach($material->images as $image)
+              <div class="image">
 
 
+              
+                  <img src="{{ asset('storage/' . $image->imagepath) }}" alt="Image for {{ $material->name }}" height="200" width="200">
+            
 
+                </div>
+          @endforeach
+      </div>
+  </div>
+@endforeach
+
+</div>
 
 
   <!-- Overlay -->
   <div class="overlay" id="overlay">
     <div class="uploadContainer">
       <button class="close-overlay" onclick="hideUploadContainer()">X</button>
-      <h2>Upload Image with Description & Price</h2>
-      <form id="image-upload-form" onsubmit="submitForm(event)">
+      <h2>Upload New Material</h2>
+
+      
+      {{-- <form action="{{route('submit-form') }}" method="POST" id="image-upload-form" enctype="multipart/form-data"> --}}
+        <form action="{{ route('materials.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+       
+        <!-- Name Field -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" required>
+        </div>
+
         <!-- Description Field -->
         <div class="form-group">
-          <label for="description">Description</label>
-          <input type="text" class="form-control" id="description" placeholder="Enter description" required>
+          <label for="name">Description</label>
+          <input type="text" class="form-control" name="description" id="description" placeholder="Enter desription" required>
         </div>
 
         <!-- Price Field -->
         <div class="form-group">
           <label for="price">Price</label>
-          <input type="number" class="form-control" id="price" placeholder="Enter price" required>
+          <input type="number" class="form-control" name="price" id="price" placeholder="Enter price" required>
         </div>
+        
+        <!-- Image Upload Field -->
+        <div class="form-group">
+          <label for="images">Images</label>
+          <input type="file" class="form-control" name="photo[]" id="images" multiple accept="image/*" required>
+        </div> 
 
-        <!-- Image Upload Section -->
-        <div class="upload-section" id="upload-section">
-          <div class="upload-item" id="upload-item-1" onclick="triggerFileInput(1)">
-            <input type="file" id="image1" accept="image/*" onchange="previewImage(event, 1)" style="display: none;">
-            <span class="icon">+</span>
-          </div>
-        </div>
-
-        <!-- Add Image Button -->
-        <button type="button" class="btn btn-primary" onclick="addImageSlot()">Add Image</button>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-success">Submit</button>
+        <!-- Multiple Image Preview Container -->
+        <div id="multiple-image-preview-container"></div>
+        
+        <button type="submit" class="btn btn-success mt-3">Submit</button>
       </form>
     </div>
   </div>
+
+
 
   <script>
     // Show the overlay
@@ -266,93 +311,83 @@
       document.getElementById('overlay').style.display = 'none';
     }
 
-    // Trigger the file input
-    function triggerFileInput(id) {
-      document.getElementById(`image${id}`).click();
+    // Image preview functionality
+    document.getElementById('images').addEventListener('change', function(event) {
+      const previewContainer = document.getElementById('multiple-image-preview-container');
+      previewContainer.innerHTML = ''; // Clear previous previews
+
+      // Convert FileList to Array and create previews
+      Array.from(this.files).forEach((file, index) => {
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+          alert('Please select only image files');
+          return;
+        }
+
+        // Create preview wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = 'image-preview-wrapper';
+        wrapper.dataset.index = index;
+
+        // Create image element
+        const imgPreview = document.createElement('img');
+        imgPreview.file = file;
+        imgPreview.classList.add('img-preview');
+
+        // Create remove button
+        const removeBtn = document.createElement('button');
+        removeBtn.innerHTML = '×';
+        removeBtn.className = 'remove-image';
+        removeBtn.onclick = function() {
+          removeImage(index);
+        };
+
+        // Use FileReader to load image
+        const reader = new FileReader();
+        reader.onload = (function(img) { 
+          return function(e) { 
+            img.src = e.target.result; 
+          }; 
+        })(imgPreview);
+        reader.readAsDataURL(file);
+
+        // Append elements
+        wrapper.appendChild(imgPreview);
+        wrapper.appendChild(removeBtn);
+        previewContainer.appendChild(wrapper);
+      });
+    });
+
+    // Function to remove an image from preview and file input
+    function removeImage(indexToRemove) {
+      const fileInput = document.getElementById('images');
+      const previewContainer = document.getElementById('multiple-image-preview-container');
+      
+      // Create a new FileList without the removed file
+      const fileList = Array.from(fileInput.files);
+      fileList.splice(indexToRemove, 1);
+
+      // Create a new FileList
+      const newFileList = new DataTransfer();
+      fileList.forEach(file => newFileList.items.add(file));
+
+      // Update file input
+      fileInput.files = newFileList.files;
+
+      // Remove preview
+      const previewToRemove = previewContainer.querySelector(`.image-preview-wrapper[data-index="${indexToRemove}"]`);
+      if (previewToRemove) {
+        previewToRemove.remove();
+      }
+
+      // Reindex remaining previews
+      document.querySelectorAll('.image-preview-wrapper').forEach((wrapper, newIndex) => {
+        wrapper.dataset.index = newIndex;
+        wrapper.querySelector('.remove-image').onclick = function() {
+          removeImage(newIndex);
+        };
+      });
     }
-
-    let imageCount = 1;  // Initial image slot count
-
-  function triggerFileInput(id) {
-    document.getElementById(`image${id}`).click();  // Trigger the file input when clicking on the upload box
-  }
-
-  function previewImage(event, id) {
-    const file = event.target.files[0];
-    const uploadItem = document.getElementById(`upload-item-${id}`);
-
-    // Clear any previous content in the upload item
-    uploadItem.innerHTML = '';
-
-    // Create the image preview element
-    const imagePreview = document.createElement('img');
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      imagePreview.src = e.target.result;
-      uploadItem.appendChild(imagePreview);
-
-      // Create and append the "X" close button
-      const closeButton = document.createElement('span');
-      closeButton.classList.add('close');
-      closeButton.textContent = 'X';
-      closeButton.onclick = function() {
-        removeImage(uploadItem, id);
-      };
-      uploadItem.appendChild(closeButton);
-    };
-    reader.readAsDataURL(file);
-  }
-
-  function removeImage(uploadItem, id) {
-    // Remove the upload item (entire box)
-    uploadItem.remove();
-  }
-
-  function addImageSlot() {
-    imageCount++; // Increment image count
-    const uploadSection = document.getElementById('upload-section');
-
-    // Create a new upload item
-    const newUploadItem = document.createElement('div');
-    newUploadItem.classList.add('upload-item');
-    newUploadItem.setAttribute('id', `upload-item-${imageCount}`);
-    newUploadItem.setAttribute('onclick', `triggerFileInput(${imageCount})`);
-
-    // Create input for the new upload item
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.id = `image${imageCount}`;
-    input.accept = 'image/*';
-    input.setAttribute('onchange', `previewImage(event, ${imageCount})`);
-
-    // Create icon for the new upload item
-    const icon = document.createElement('span');
-    icon.classList.add('icon');
-    icon.innerText = '+';
-
-    // Append input and icon to the new upload item
-    newUploadItem.appendChild(input);
-    newUploadItem.appendChild(icon);
-
-    // Append new upload item to the section
-    uploadSection.appendChild(newUploadItem);
-  }
-
-  function submitForm(event) {
-    event.preventDefault();
-
-    const description = document.getElementById('description').value;
-    const price = document.getElementById('price').value;
-
-    if (!description || !price) {
-      alert('Please fill in all fields');
-      return;
-    }
-
-    alert(`Description: ${description}, Price: ${price}, Images Uploaded!`);
-    // You can submit form data via AJAX here to your server or handle it accordingly
-  }
-
   </script>
 </body>
 </html>

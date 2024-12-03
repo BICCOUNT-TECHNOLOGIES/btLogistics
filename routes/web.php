@@ -5,6 +5,9 @@ use App\Http\Controllers\registerLogin;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\manufacturerController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\ProfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +42,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Route::get('/dashboard', [registerLogin::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::post('/materialss', '[MaterialController]@store');
+ Route::post('/profile/upload', [ProfController::class, 'uploadProfileImage'])->name('profile.upload');
+Route::post('/materialss', [MaterialController::class, 'store'])->name('materials.store');
+// Route::post('/submit-form', [MaterialController::class,'submitForm'])->name('submit-form');
+// Route::get('/success', function () { 
+    
+//     return view('form.success');})->name('form.success');
+
+// profile picture
+Route::post('/profile/update-picture', [ProfileController::class, 'updateProfilePicture'])
+    ->name('profile.update-picture');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

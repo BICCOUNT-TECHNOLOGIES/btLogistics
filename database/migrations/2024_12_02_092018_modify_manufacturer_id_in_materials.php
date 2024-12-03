@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('materials', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('materialtypes');
-            $table->integer('price');
-            $table->string('category');
-            $table->timestamps();
+        Schema::table('materials', function (Blueprint $table) {
+            //
+            $table->unsignedBigInteger('manufacturer_id')->nullable(false)->change();
         });
     }
 
@@ -27,7 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // 
-        Schema::dropIfExists('materials');
+        Schema::table('materials', function (Blueprint $table) {
+            //
+            // $table->unsignedBigInteger('manufacturer_id')->nullable()->change();
+        });
     }
 };
