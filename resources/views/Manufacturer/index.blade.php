@@ -226,8 +226,12 @@
 
     <div class="profile">
 
-      <img src="{{ auth()->user()->profile_picture_url }}" alt="Profile Picture">
-      <span class="profile-name">{{Auth::user()->name}}!</span>
+       <img src="" alt="Profile Picture" class="img-fluid">
+      
+      {{-- <span class="profile-name">{{Auth::user()->name}}</span> --}}
+     <span class="profile-name"> <a href="{{route('profile-picture')}}">{{Auth::user()->name}}</a> </span>
+
+      
     </div>
   </header>
 

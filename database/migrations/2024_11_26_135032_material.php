@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //
         Schema::table('materials', function (Blueprint $table) {
-            //
-            $table->dropColumn('manufacturer_id');
+            $table->string('description')->nullable(); // Adjust column type if necessary
         });
     }
 
@@ -22,9 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('materials', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('manufacturer_id')->nullable();
-        });
+        // 
+        Schema::dropIfExists('materials');
     }
 };

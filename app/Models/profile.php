@@ -1,5 +1,5 @@
 <?php
-// app/Models/User.php
+namespace App\Http\Controllers;
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +19,9 @@ class User extends Authenticatable
     // Optional: If you want to add a mutator or accessor for profile picture
     public function getProfilePictureAttribute($value)
     {
-        return $value ? asset('storage/profile_pictures/' . $value) : asset('default-profile.png');
+        return $this->profile_picture 
+        ? route('profile-picture', ['filename' => $this->profile_picture])
+        : asset('default-profile.jpg');
+        // return $value ? asset('storage/profile_pictures/' . $value) : asset('default-profile.png');
     }
 }

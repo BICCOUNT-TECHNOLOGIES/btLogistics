@@ -8,6 +8,7 @@ use App\Http\Controllers\manufacturerController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProfController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Route::get('/dashboard', [registerLogin::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/materialss', '[MaterialController]@store');
- Route::post('/profile/upload', [ProfController::class, 'uploadProfileImage'])->name('profile.upload');
+//  Route::post('/profile/upload', [ProfileController::class, 'uploadProfileImage'])->name('profile.upload');
 Route::post('/materialss', [MaterialController::class, 'store'])->name('materials.store');
 // Route::post('/submit-form', [MaterialController::class,'submitForm'])->name('submit-form');
 // Route::get('/success', function () { 
@@ -51,13 +52,22 @@ Route::post('/materialss', [MaterialController::class, 'store'])->name('material
 //     return view('form.success');})->name('form.success');
 
 // profile picture
-Route::post('/profile/update-picture', [ProfileController::class, 'updateProfilePicture'])
-    ->name('profile.update-picture');
+
+// In routes/web.php
+Route::get('/profile-picture', [ProfileController::class, 'getProfilePicture'])
+    ->name('profile-picture');
+
+//    manufacturer profile
+    Route::get('/user/{id}', [ManufacturerController::class, 'show'])->name('manufacturer.profile');
+
+    // manufacturer edit, delete button
+Route::get('/user', [ManufacturerController::class, 'edit'])->name('manufacturer.edit');
+ Route::put('/manufacturer', [ManufacturerController::class, 'delete'])->name('manufacturer.delete');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

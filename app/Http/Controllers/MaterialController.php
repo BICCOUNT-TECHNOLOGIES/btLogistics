@@ -53,12 +53,12 @@ class MaterialController extends Controller
         
          foreach ($storedPaths as $path) {
             Image::create([
-                'materials_id' => $material->id,
+                'material_id' => $material->id,
                 'imagepath' => $path,
             ]);
         }        
    
-         // return redirect()->route('materials.index')->with('success', 'Material added successfully!');
+         return redirect()->route('dashboard')->with('success', 'Material added successfully!');
    
 
 
