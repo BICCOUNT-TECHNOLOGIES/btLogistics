@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ asset('styles.css') }}">
   <link rel="stylesheet" href="manufacturer/styles.css">
   <title>Murram Road Division</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -208,6 +209,16 @@
   </style>
 </head>
 <body>
+
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+
   <!-- Sidebar -->
   <div class="sidebar">
     <button class="add-material-btn" onclick="showUploadContainer()">Add Material</button>
@@ -236,19 +247,19 @@
   </header>
 
 <div class="images" style="margin-left: 40vw">
-  
+
   @foreach($materials as $material)
   <div class="material">
       <h2>{{ $material->name }}</h2>
-      
+
       <div class="images">
           @foreach($material->images as $image)
               <div class="image">
 
 
-              
+
                   <img src="{{ asset('storage/' . $image->imagepath) }}" alt="Image for {{ $material->name }}" height="200" width="200">
-            
+
 
                 </div>
           @endforeach
@@ -259,17 +270,147 @@
 </div>
 
 
+ {{-- Material display section --}}
+
+ <div class="product-container">
+    <div class="product-image">
+
+       <img id="mainImage" src="Thy instructions..png" alt="Men's sandals" />
+
+        <div class="image-thumbnails">
+
+
+            @foreach($material->images as $image)
+            <div class="image">
+
+
+
+                <img src="{{ asset('storage/' . $image->imagepath) }}" alt="Image for {{ $material->name }}" height="200" width="200">
+
+
+              </div>
+        @endforeach
+
+            <img class="thumbnail" src="soil.jpeg" alt="Thumbnail 1" onclick="changeImage('soil.jpeg')" />
+            <img class="thumbnail" src="ssp.jpg" alt="Thumbnail 2" onclick="changeImage('ssp.jpg')" />
+            <img class="thumbnail main-thumbnail" src="su.jpg" alt="Main Thumbnail" onclick="changeImage('su.jpg')" />
+            <img class="thumbnail" src="home1.jpg" alt="Thumbnail 3" onclick="changeImage('home1.jpg')" />
+            <img class="thumbnail" src="home2.jpg" alt="Thumbnail 4" onclick="changeImage('home2.jpg')" />
+            </div>
+    </div>
+
+
+
+    <div class="product-info">
+      <h1>ASSKLO Men's Shoes Designer Sandals</h1>
+      <p class="description">Men fashion versatile Beach Sandal Split Leisure Shoes Large Size New Big Outdoor Walking Footwear Soft slippery and odor resistant Sandals slippers.</p>
+      <div class="rating">
+        <span class="stars">★★★★☆</span>
+        <span class="reviews">(72 Customer reviews)</span>
+      </div>
+
+
+      <div class="price">
+        <span class="discounted-price">KSh 399</span>
+        <span class="original-price">KSh 2,999</span>
+        <span class="discount">87% off</span>
+      </div>
+
+      <div class="flash-sale">
+        <span>Flash Sales</span>
+        <span class="timer">Closing in <span id="countdown"></span></span>
+      </div>
+
+      <div class="color">
+        <label for="color">Color:</label>
+        <select id="color">
+          <option value="brown">Brown</option>
+        </select>
+      </div>
+
+
+      <div class="size">
+        <label for="size">Size:</label>
+        <select id="size">
+          <option value="42">EU42</option>
+          <option value="43">EU43</option>
+          <option value="44">EU44</option>
+          <option value="45">EU45</option>
+        </select>
+      </div>
+
+      <div class="delivery-info">
+        <p>Ships from <strong>Nairobi</strong>, arrives in <strong>Ziwani/Kariokor</strong> within 1-3 workdays</p>
+      </div>
+      <div class="quantity">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" value="1" min="1" />
+      </div>
+
+      <div class="buttons">
+        <button class="add-to-cart">Add to Cart</button>
+        <button class="buy-now">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Countdown Timer
+    const countdownElement = document.getElementById('countdown');
+    const countdownEnd = new Date().getTime() + 15 * 60 * 1000; // 15 minutes countdown
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = countdownEnd - now;
+
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+      if (distance < 0) {
+        clearInterval(timerInterval);
+        countdownElement.innerHTML = "EXPIRED";
+      }
+    }
+
+    const timerInterval = setInterval(updateCountdown, 1000);
+
+    // Change Main Image on Thumbnail Click
+    function changeImage(imageSource) {
+      const mainImage = document.getElementById('mainImage');
+      mainImage.src = imageSource;
+
+      // Add 'main-thumbnail' class to active thumbnail
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      thumbnails.forEach(thumb => thumb.classList.remove('main-thumbnail'));
+      const activeThumbnail = Array.from(thumbnails).find(thumb => thumb.src.includes(imageSource));
+      activeThumbnail.classList.add('main-thumbnail');
+    }
+  </script>
+
+ {{-- End of material display section --}}
+
+
+
+
+
+
+
+
+
+
   <!-- Overlay -->
   <div class="overlay" id="overlay">
     <div class="uploadContainer">
       <button class="close-overlay" onclick="hideUploadContainer()">X</button>
       <h2>Upload New Material</h2>
 
-      
+
       {{-- <form action="{{route('submit-form') }}" method="POST" id="image-upload-form" enctype="multipart/form-data"> --}}
         <form action="{{ route('materials.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-       
+
         <!-- Name Field -->
         <div class="form-group">
           <label for="name">Name</label>
@@ -287,16 +428,16 @@
           <label for="price">Price</label>
           <input type="number" class="form-control" name="price" id="price" placeholder="Enter price" required>
         </div>
-        
+
         <!-- Image Upload Field -->
         <div class="form-group">
           <label for="images">Images</label>
           <input type="file" class="form-control" name="photo[]" id="images" multiple accept="image/*" required>
-        </div> 
+        </div>
 
         <!-- Multiple Image Preview Container -->
         <div id="multiple-image-preview-container"></div>
-        
+
         <button type="submit" class="btn btn-success mt-3">Submit</button>
       </form>
     </div>
@@ -348,10 +489,10 @@
 
         // Use FileReader to load image
         const reader = new FileReader();
-        reader.onload = (function(img) { 
-          return function(e) { 
-            img.src = e.target.result; 
-          }; 
+        reader.onload = (function(img) {
+          return function(e) {
+            img.src = e.target.result;
+          };
         })(imgPreview);
         reader.readAsDataURL(file);
 
@@ -366,7 +507,7 @@
     function removeImage(indexToRemove) {
       const fileInput = document.getElementById('images');
       const previewContainer = document.getElementById('multiple-image-preview-container');
-      
+
       // Create a new FileList without the removed file
       const fileList = Array.from(fileInput.files);
       fileList.splice(indexToRemove, 1);
@@ -393,5 +534,18 @@
       });
     }
   </script>
+
+
+
+<script>
+    window.addEventListener("load", function () {
+        setTimeout(function () {
+            const preloader = document.getElementById("preloader");
+            preloader.style.opacity = "0"; // Start fading out the preloader
+            preloader.style.visibility = "hidden"; // Hide the preloader after fading out
+        }, 1000); // Delay of 5000 milliseconds (5 seconds)
+    });
+
+      </script>
 </body>
 </html>
