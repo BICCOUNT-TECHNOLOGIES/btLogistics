@@ -28,15 +28,15 @@ class MaterialController extends Controller
 
 
         // Initialize image paths array
-        $storedPaths = []; 
+        $storedPaths = [];
         foreach ($request->file('photo') as $image) {
             // Store the image in the 'storage/app/public/photos' directory
             $path = $image->store('manufacturer', 'public');
             $storedPaths[] = $path;
 
         }
-    
-        
+
+
 
 //    return response()->json([
 //        'manufacturer_id' => $manufacturerId,
@@ -50,16 +50,16 @@ class MaterialController extends Controller
              'image_path' => json_encode($storedPaths),  // Store multiple paths as JSON
          ]);
 
-        
+
          foreach ($storedPaths as $path) {
             Image::create([
-                'materials_id' => $material->id,
+                'material_id' => $material->id,
                 'imagepath' => $path,
             ]);
-        }        
-   
-         // return redirect()->route('materials.index')->with('success', 'Material added successfully!');
-   
+        }
+
+         return redirect()->route('dashboard')->with('success', 'Material added successfully!');
+
 
 
 
