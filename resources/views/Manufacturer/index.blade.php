@@ -98,6 +98,9 @@
       padding: 5px 25px;
       background-color: #007FFF;
       color: white;
+      position: sticky;
+      width: 100%;
+      top: 0;
     }
 
     /* Logo Styles */
@@ -246,64 +249,30 @@
     </div>
   </header>
 
-<div class="images" style="margin-left: 40vw">
-
-  @foreach($materials as $material)
-  <div class="material">
-      <h2>{{ $material->name }}</h2>
-
-      <div class="images">
-          @foreach($material->images as $image)
-              <div class="image">
-
-
-
-                  <img src="{{ asset('storage/' . $image->imagepath) }}" alt="Image for {{ $material->name }}" height="200" width="200">
-
-
-                </div>
-          @endforeach
-      </div>
-  </div>
-@endforeach
-
-</div>
-
 
  {{-- Material display section --}}
 
- <div class="product-container">
-    <div class="product-image">
+ @isset($materials)
+ @foreach($materials as $material)
+     <div class="product-container">
+         <div class="product-image">
+             <!-- Main Image -->
+             <img id="mainImage" src="{{ asset('storage/' . $material->images->first()->imagepath) }}" alt="Men's sandals" /> <!-- Assuming first image as main image -->
 
-       <img id="mainImage" src="Thy instructions..png" alt="Men's sandals" />
+             <div class="image-thumbnails">
+                 @foreach($material->images as $image)
 
-        <div class="image-thumbnails">
+                         <img class="thumbnail" src="{{ asset('storage/' . $image->imagepath) }}" alt="Image for {{ $material->name }}" onclick="changeImage('{{ asset('storage/' . $image->imagepath) }}')">
 
+                 @endforeach
+             </div>
 
-            @foreach($material->images as $image)
-            <div class="image">
-
-
-
-                <img src="{{ asset('storage/' . $image->imagepath) }}" alt="Image for {{ $material->name }}" height="200" width="200">
-
-
-              </div>
-        @endforeach
-
-            <img class="thumbnail" src="soil.jpeg" alt="Thumbnail 1" onclick="changeImage('soil.jpeg')" />
-            <img class="thumbnail" src="ssp.jpg" alt="Thumbnail 2" onclick="changeImage('ssp.jpg')" />
-            <img class="thumbnail main-thumbnail" src="su.jpg" alt="Main Thumbnail" onclick="changeImage('su.jpg')" />
-            <img class="thumbnail" src="home1.jpg" alt="Thumbnail 3" onclick="changeImage('home1.jpg')" />
-            <img class="thumbnail" src="home2.jpg" alt="Thumbnail 4" onclick="changeImage('home2.jpg')" />
-            </div>
-    </div>
-
+     </div>
 
 
     <div class="product-info">
-      <h1>ASSKLO Men's Shoes Designer Sandals</h1>
-      <p class="description">Men fashion versatile Beach Sandal Split Leisure Shoes Large Size New Big Outdoor Walking Footwear Soft slippery and odor resistant Sandals slippers.</p>
+      <h1>Sand Materials</h1>
+      <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, nisi officia molestiae sunt expedita, reiciendis maiores veniam natus quidem sit sed non architecto! Facere, tempora! Hic sunt, tempore eveniet ipsum fuga suscipit, labore sapiente soluta quibusdam, praesentium sit possimus quod vitae. Ullam dignissimos, suscipit unde asperiores odit fuga est eius?</p>
       <div class="rating">
         <span class="stars">★★★★☆</span>
         <span class="reviews">(72 Customer reviews)</span>
@@ -347,12 +316,14 @@
         <input type="number" id="quantity" value="1" min="1" />
       </div>
 
-      <div class="buttons">
-        <button class="add-to-cart">Add to Cart</button>
-        <button class="buy-now">Buy Now</button>
-      </div>
+
     </div>
   </div>
+  <br>
+  @endforeach
+  @else
+   <p>No materials available.</p>
+  @endisset
 
   <script>
     // Countdown Timer
