@@ -58,11 +58,17 @@ class MaterialController extends Controller
             ]);
         }        
    
-         // return redirect()->route('materials.index')->with('success', 'Material added successfully!');
+          return redirect()->route('dashboard')->with('success', 'Material added successfully!');
    
-
-
-
-
 }
+
+public function index()
+{
+    // Fetch all products from the database
+    $materials = material::all();
+
+    // Pass the data to the view
+    return view('material.index', compact(''));
+}
+
 }
