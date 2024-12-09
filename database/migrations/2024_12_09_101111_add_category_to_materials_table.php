@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::table('materials', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('manufacturer_id')->nullable()->after('name');
-            $table->foreign('manufacturer_id')->references('id')->on('manufacturers')->onDelete('set null');
+            Schema::table('materials', function (Blueprint $table) {
+                $table->string('category'); // Add the 'category' column
+            });
         });
     }
 
@@ -25,8 +26,10 @@ return new class extends Migration
     {
         Schema::table('materials', function (Blueprint $table) {
             //
-            $table->dropForeign(['manufacturer_id']);
-            $table->dropColumn('manufacturer_id');
+
+            Schema::table('materials', function (Blueprint $table) {
+                $table->dropColumn('category'); // Remove the 'category' column if rolled back
+            });
         });
     }
 };

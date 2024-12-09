@@ -26,14 +26,13 @@ class MaterialController extends Controller
         $userId = Auth::id(); // Retrieves the logged-in user's ID
         $manufacturerId = Manufacturer::where('user_id', $userId)->value('id');
 
-
+        
         // Initialize image paths array
         $storedPaths = [];
         foreach ($request->file('photo') as $image) {
             // Store the image in the 'storage/app/public/photos' directory
             $path = $image->store('manufacturer', 'public');
             $storedPaths[] = $path;
-
         }
 
 

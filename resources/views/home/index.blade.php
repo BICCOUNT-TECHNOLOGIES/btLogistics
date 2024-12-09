@@ -34,7 +34,7 @@
       @if(Auth::check())
     <p>Welcome, {{ Auth::user()->name }}!</p>
 @else
-      <a href="{{ route('login') }}" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="{{ route('login', 2) }}" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a>
       @endif
       {{-- <a href="{{ route('signup') }}"class="login-btn"><i class="fas fa-sign-in-alt"></i>Work With Us</a> --}}
     </nav>

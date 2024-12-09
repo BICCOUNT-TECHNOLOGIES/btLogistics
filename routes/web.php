@@ -35,21 +35,17 @@ Route::get('/about', [homeController::class, 'about'])->name('about');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Route::get('/client/dashboard', [ClientDashboardController::class, 'index'])->name('client.dashboard');
+    
     Route::get('/dashboard', [manufacturerController::class, 'index'])->name('dashboard');
-    // Route::get('/supplier/dashboard', [SupplierDashboardController::class, 'index'])->name('supplier.dashboard');
+    
 });
 
 
-// Route::get('/dashboard', [registerLogin::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::post('/materialss', '[MaterialController]@store');
-//  Route::post('/profile/upload', [ProfileController::class, 'uploadProfileImage'])->name('profile.upload');
+
 Route::post('/materialss', [MaterialController::class, 'store'])->name('materials.store');
-// Route::post('/submit-form', [MaterialController::class,'submitForm'])->name('submit-form');
-// Route::get('/success', function () { 
-    
-//     return view('form.success');})->name('form.success');
 
 // profile picture
 
@@ -65,9 +61,9 @@ Route::get('/user', [ManufacturerController::class, 'edit'])->name('manufacturer
  Route::put('/manufacturer', [ManufacturerController::class, 'delete'])->name('manufacturer.delete');
 
 Route::middleware('auth')->group(function () {
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
 require __DIR__.'/auth.php';

@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('materials', function (Blueprint $table) {
-            //
-            $table->string('type')->default('sand')->change();
+        //
+        Schema::create('images', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('material_id'); 
+            $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -22,9 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('materials', function (Blueprint $table) {
-            //
-            $table->string('materialtypes')->default(null)->change();
-        });
+        //
+        Schema::dropIfExists('images');
     }
 };

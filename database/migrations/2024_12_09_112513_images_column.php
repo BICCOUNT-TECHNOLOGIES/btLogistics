@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('materials', function (Blueprint $table) {
-            //
-            $table->string('type')->default('sand')->change();
-        });
+        //
+        Schema::table('images', function (Blueprint $table) {
+            $table->string('imagepath')->nullable(); // Add the 'category' column
+        });      
     }
 
     /**
@@ -22,9 +22,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('materials', function (Blueprint $table) {
-            //
-            $table->string('materialtypes')->default(null)->change();
+        //
+        Schema::table('images', function (Blueprint $table) {
+            $table->dropColumn('imagepath'); // Remove the 'category' column if rolled back
         });
+
     }
 };

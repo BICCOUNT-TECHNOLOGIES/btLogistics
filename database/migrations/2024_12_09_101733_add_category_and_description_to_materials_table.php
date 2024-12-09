@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::table('materials', function (Blueprint $table) {
             //
-            $table->string('type')->default('sand')->change();
+            Schema::table('materials', function (Blueprint $table) {
+                $table->text('description'); // Add 'description' column
+            });
         });
     }
 
@@ -24,7 +26,9 @@ return new class extends Migration
     {
         Schema::table('materials', function (Blueprint $table) {
             //
-            $table->string('materialtypes')->default(null)->change();
+            Schema::table('materials', function (Blueprint $table) {
+                $table->dropColumn('description'); // Remove 'description' column if rolled back
+            });
         });
     }
 };

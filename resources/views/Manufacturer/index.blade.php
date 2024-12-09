@@ -249,127 +249,119 @@
     </div>
   </header>
 
+{{-- Material display section --}}
+@isset($materials)
+@if($materials->isEmpty())
+    <p>No materials available.</p>
+@else
+    @foreach($materials as $material)
+        <div class="product-container">
+            <div class="product-image">
+                <!-- Main Image -->
+                @if($material->images->isNotEmpty()) <!-- Check if there are any images -->
+                    <img 
+                        class="mainImage"
+                        data-material-id="{{ $material->id }}" 
+                        src="{{ asset('storage/' . $material->images->first()->imagepath) }}" 
+                        alt="Main image for {{ $material->name }}" 
+                    />
 
- {{-- Material display section --}}
+                    <div class="image-thumbnails">
+                        @foreach($material->images as $image)
+                            <img 
+                                class="thumbnail" 
+                                src="{{ asset('storage/' . $image->imagepath) }}" 
+                                alt="Thumbnail for {{ $material->name }}" 
+                                onclick="changeImage('{{ $image->imagepath }}', {{ $material->id }})"
+                            />
+                        @endforeach
+                    </div>
+                @else
+                    <p>No images available for {{ $material->name }}</p>
+                @endif    
+            </div>
 
- @isset($materials)
- @foreach($materials as $material)
-     <div class="product-container">
-         <div class="product-image">
-             <!-- Main Image -->
-             <img id="mainImage" src="{{ asset('storage/' . $material->images->first()->imagepath) }}" alt="Men's sandals" /> <!-- Assuming first image as main image -->
+            <div class="product-info">
+                <h1>{{ $material->name }}</h1>
+                <p class="description">{{ $material->description }}</p>
+                <div class="rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="reviews">(72 Customer reviews)</span>
+                </div>
 
-             <div class="image-thumbnails">
-                 @foreach($material->images as $image)
+                <div class="price">
+                    <span class="discounted-price"> KSH {{ $material->price }}</span>
+                    {{-- <span class="original-price">KSh 2,999</span>
+                    <span class="discount">87% off</span> --}}
+                </div> 
 
-                         <img class="thumbnail" src="{{ asset('storage/' . $image->imagepath) }}" alt="Image for {{ $material->name }}" onclick="changeImage('{{ asset('storage/' . $image->imagepath) }}')">
+                {{-- <div class="flash-sale">
+                    <span>Flash Sales</span>
+                    <span class="timer">Closing in <span id="countdown"></span></span>
+                </div> --}}
 
-                 @endforeach
-             </div>
+                <div class="color">
+                    <label for="color">Color:</label>
+                    <select id="color">
+                        <option value="brown">Brown</option>
+                    </select>
+                </div>
 
-     </div>
-
-
-    <div class="product-info">
-      <h1>Sand Materials</h1>
-      <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, nisi officia molestiae sunt expedita, reiciendis maiores veniam natus quidem sit sed non architecto! Facere, tempora! Hic sunt, tempore eveniet ipsum fuga suscipit, labore sapiente soluta quibusdam, praesentium sit possimus quod vitae. Ullam dignissimos, suscipit unde asperiores odit fuga est eius?</p>
-      <div class="rating">
-        <span class="stars">★★★★☆</span>
-        <span class="reviews">(72 Customer reviews)</span>
-      </div>
-
-
-      <div class="price">
-        <span class="discounted-price">KSh 399</span>
-        <span class="original-price">KSh 2,999</span>
-        <span class="discount">87% off</span>
-      </div>
-
-      <div class="flash-sale">
-        <span>Flash Sales</span>
-        <span class="timer">Closing in <span id="countdown"></span></span>
-      </div>
-
-      <div class="color">
-        <label for="color">Color:</label>
-        <select id="color">
-          <option value="brown">Brown</option>
-        </select>
-      </div>
-
-
-      <div class="size">
-        <label for="size">Size:</label>
-        <select id="size">
-          <option value="42">EU42</option>
-          <option value="43">EU43</option>
-          <option value="44">EU44</option>
-          <option value="45">EU45</option>
-        </select>
-      </div>
-
-      <div class="delivery-info">
-        <p>Ships from <strong>Nairobi</strong>, arrives in <strong>Ziwani/Kariokor</strong> within 1-3 workdays</p>
-      </div>
-      <div class="quantity">
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" value="1" min="1" />
-      </div>
+                <div class="quantity">
+                  <b>
+                  <span class="discounted-price"> Quantity </span>
+                  <span class="discounted-price"> 1 Tonne</span>
+                </b>
+              </div>
 
 
-    </div>
-  </div>
-  <br>
-  @endforeach
-  @else
-   <p>No materials available.</p>
-  @endisset
+                <div class="delivery-info">
+                    <p>Ships from <strong>NAIROBI</strong>, arrives at <strong> YOUR DESIRED DESTINATION</strong> within 24hrs</p>
+                </div>
+            </div>
+        </div>
+        <br>
+    @endforeach
+@endif
+@endisset
 
-  <script>
+<script>
     // Countdown Timer
     const countdownElement = document.getElementById('countdown');
     const countdownEnd = new Date().getTime() + 15 * 60 * 1000; // 15 minutes countdown
 
     function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = countdownEnd - now;
+        const now = new Date().getTime();
+        const distance = countdownEnd - now;
 
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdownElement.innerHTML = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        countdownElement.innerHTML = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
-      if (distance < 0) {
-        clearInterval(timerInterval);
-        countdownElement.innerHTML = "EXPIRED";
-      }
+        if (distance < 0) {
+            clearInterval(timerInterval);
+            countdownElement.innerHTML = "EXPIRED";
+        }
     }
 
     const timerInterval = setInterval(updateCountdown, 1000);
 
     // Change Main Image on Thumbnail Click
-    function changeImage(imageSource) {
-      const mainImage = document.getElementById('mainImage');
-      mainImage.src = imageSource;
+    function changeImage(imagePath, materialId) {
+        // Find the main image of the specific material
+        const mainImage = document.querySelector(`.mainImage[data-material-id='${materialId}']`);
+        mainImage.src = `/storage/${imagePath}`;
 
-      // Add 'main-thumbnail' class to active thumbnail
-      const thumbnails = document.querySelectorAll('.thumbnail');
-      thumbnails.forEach(thumb => thumb.classList.remove('main-thumbnail'));
-      const activeThumbnail = Array.from(thumbnails).find(thumb => thumb.src.includes(imageSource));
-      activeThumbnail.classList.add('main-thumbnail');
+        // Remove 'main-thumbnail' class from all thumbnails of this material
+        const thumbnails = mainImage.closest('.product-container').querySelectorAll('.thumbnail');
+        thumbnails.forEach(thumb => thumb.classList.remove('main-thumbnail'));
+
+        // Highlight the selected thumbnail
+        const activeThumbnail = Array.from(thumbnails).find(thumb => thumb.src.includes(imagePath));
+        if (activeThumbnail) activeThumbnail.classList.add('main-thumbnail');
     }
-  </script>
-
- {{-- End of material display section --}}
-
-
-
-
-
-
-
-
-
+</script>
 
   <!-- Overlay -->
   <div class="overlay" id="overlay">
@@ -518,5 +510,6 @@
     });
 
       </script>
+
 </body>
 </html>

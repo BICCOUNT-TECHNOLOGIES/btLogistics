@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('materials', function (Blueprint $table) {
+        Schema::table('images', function (Blueprint $table) {
             //
-            $table->string('type')->default('sand')->change();
+            $table->string('imagepath')->nullable(false)->change(); // Remove nullable property
         });
     }
 
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('materials', function (Blueprint $table) {
+        Schema::table('images', function (Blueprint $table) {
             //
-            $table->string('materialtypes')->default(null)->change();
+            $table->string('imagepath')->nullable()->change(); // Re-add nullable property
         });
     }
 };
