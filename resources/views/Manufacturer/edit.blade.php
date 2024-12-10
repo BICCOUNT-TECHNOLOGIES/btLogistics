@@ -134,6 +134,7 @@
     <div class="container">
         <header>
             <div class="logo">
+                
                 <img src="logo.png" alt="Logo">
             </div>
             <h1>Update Profile</h1>
@@ -142,6 +143,8 @@
         <form class="profile-form" enctype="multipart/form-data">
             <!-- Profile Picture Section -->
             <div class="profile-picture">
+                <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture">
+
                 <label for="profile-picture">Profile Picture</label>
                 <input type="file" id="profile-picture" name="profile-picture[]">
             </div>

@@ -2,54 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function updateProfilePicture(Request $request)
-    {
-        // Validate the uploaded file
-        $request->validate([
-            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
+    public function getProfile(Request $request)
+  {
+    $user = Auth::user();
+    return view('manufacturer.profile', compact('user'));
 
-        // Get the authenticated user
-        $user = Auth::user();
 
-        // Check if a file was uploaded
-        if ($request->hasFile('profile_picture')) {
-            // Generate unique filename
-            $filename = time() . '_' . $user->id . '.' . $request->file('profile_picture')->getClientOriginalExtension();
+}
 
-            // Store the file
-            $path = $request->file('profile_picture')->storeAs(
-                'public/profile_pictures', 
-                $filename
-            );
 
-            // // Update user's profile picture
-            // $user->profile_picture = $filename;
-            // $user->save();
+public function editProfile(Request $request){
+// dd($request->all());
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'location' => 'required|string|max:255',
+        'photo' => 'required', // Max 2MB image
+        'phone' => 'required',
+    ]);
 
-            return redirect()->back()->with('success', 'Profile picture updated successfully');
-        }
+    // Get the authenticated user
+    $user = Auth::user();
 
-        return redirect()->back()->with('error', 'No file uploaded');
+    // Update user details
+    $user->name = $validatedData['name'];
+    $user->email = $validatedData['email'];
+    $user->location = $validatedData['location'];
+    $user->phone = $validatedData['phone'];
+
+    // Handle photo upload if provided
+    if ($request->hasFile('photo')) {
+
+    //  Delete the old photo if it exists
+
+       if ($user->photo) {
+            Storage::delete($user->photo);
     }
 
-    public function getProfilePicture()
-    {
-        // $path = storage_path('app/public/profile_pictures/' . $filename);
+        // Store the new photo and get its path
+        $path = $request->file('photo')->store('photos', 'public');
 
-        // if (!file_exists($path)) {
-            // abort(404);
-        // }
+        // $path = $request->store('photos', 'public');
 
-        // return response()->file($path);
-        return view('Manufacturer.profile');
+        $user->profile_picture = $path;
     }
 
-    
+    // $user->profile_picture = $validatedData['photo'];
+
+    // Save the user record
+    $user->save();
+
+    // Redirect with a success message
+    return redirect()->back()->with('success', 'Profile updated successfully!');
+
+
+}
+
+
+public function showProfile()
+{
+    // Get the logged-in user
+    $user = auth()->user();
+
+    // Return the user's profile data, including the profile picture
+    return view('profile.edit', compact('user'));
+}
 }

@@ -47,7 +47,7 @@ class AuthenticatedSessionController extends Controller
         // Redirect based on user_type
         $user = Auth::user();
     
-        switch ($user->user_type) {
+        switch ($user->userType) {
             case 1:
                 return redirect()->route('client.dashboard'); // Define this route
             case 2:

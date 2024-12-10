@@ -1,14 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\registerLogin;
-use App\Http\Controllers\homeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\manufacturerController;
-use App\Http\Controllers\FormController;
-use App\Http\Controllers\MaterialController;
-use App\Http\Controllers\ProfController;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\homeController;
+use App\Http\Controllers\ProfController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\manufacturerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,9 +51,14 @@ Route::post('/materialss', [MaterialController::class, 'store'])->name('material
 
 // profile picture
 
-// In routes/web.php
-Route::get('/profile-picture', [ProfileController::class, 'getProfilePicture'])
-    ->name('profile-picture');
+// profileController Routes
+
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile-picture', 'getProfile')->name('profile');       // get Profile details
+    Route::post('/edit-picture', 'editProfile')->name('edit');    // Edit user details
+    
+});
+
 
 //    manufacturer profile
     Route::get('/user/{id}', [ManufacturerController::class, 'show'])->name('manufacturer.profile');
@@ -63,7 +70,23 @@ Route::get('/user', [ManufacturerController::class, 'edit'])->name('manufacturer
 Route::middleware('auth')->group(function () {
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    
 });
+
+
+
+// upload profile
+Route::get('/profile/{id}/picture', [ProfileController::class, 'getProfilePicture']);
+Route::get('/profile', [ProfileController::class, 'showProfile']);
+
+// Route::post('/profile/upload', [ProfileController::class, 'uploadProfilePicture'])->name('profile.upload');
+
+
+
+// logout
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/'); // Redirect to homepage or login page
+})->name('logout');
+
 
 require __DIR__.'/auth.php';

@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
+    <title>User</title> 
+     <link rel="stylesheet" href="{{ asset('styles.css') }}">
+
+    <link rel="stylesheet" href="manufacturer/styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
     <style>
         /* General Styles */
         
@@ -197,7 +203,60 @@
     .profile-name {
       font-size: 16px;
     }
+/* Modal/Overlay Styles */
+.overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .uploadContainer {
+       background-color: white; 
+      padding: 20px;
+      border-radius: 10px;
+      width: 50%;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      position: relative;
+    }
+
+    .close-overlay {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .close-overlay:hover {
+      background-color: #c82333;
+    }
+
+    .uploadContainer {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 50%;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      position: relative;
+    }
+    
     </style>
+
 </head>
 <body>
     <div class="container">
@@ -210,14 +269,14 @@
         <div class="profile-section">
             <!-- Profile Image -->
             <div class="profile-image">
-                <img src="https://via.placeholder.com/150" alt="Profile Picture">
+                <img src="{{ asset(Auth::user()->profile_picture) }}" alt="Profile Picture" />
             </div>
 
             
             <!-- Profile Info -->
             <div class="profile-info">
-                <h2>John Doe</h2>
-                <p><strong>Email:</strong> johndoe@example.com</p>
+                <h2>{{ $user->name }}</h2>
+                <p><strong>Email:</strong> {{ $user->email }}</p>
                 <p><strong>Phone:</strong> +123 456 7890</p>
                 <p><strong>Location:</strong> New York, USA</p>
                 <p><strong>About:</strong> A software engineer with a passion for building intuitive web applications.</p>
@@ -227,12 +286,80 @@
 
         <!-- Actions Section -->
         <div class="actions">
-            <a href="{{ route('manufacturer.edit')}}" class="edit">Edit Profile</a>
+            <button onclick="showUploadContainer()"  >Edit Profile</button>
+            
             <a href="{{route('manufacturer.delete')}}" class="secondary" id="deleteAccount">Delete Account</a>
         </div>
     </div>
 
     </div>
+
+{{--Edit Overlay --}}
+<div class="overlay" id="edit">
+    <div class="uploadContainer">
+      <button class="close-overlay" onclick="hideUploadContainer()">X</button>
+      <h2>Edit Your Profile Details</h2>
+
+
+      {{-- <form action="{{route('submit-form') }}" method="POST" id="image-upload-form" enctype="multipart/form-data"> --}}
+        <form action="{{ route('edit') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
+        <!-- Name Field -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="{{ $user->name }}" required>
+        </div>
+        <!-- Name Field -->
+        <div class="form-group">
+            <label for="name">Email</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="{{ $user->email }}" required>
+          </div>
+ 
+        <!-- Phone Field -->
+        <div class="form-group">
+          <label for="name">Phone</label>
+          <input type="tel" class="form-control" name="phone" id="phone"  placeholder="+254713927050" pattern="^(?:\+254|0)7\d{8}$"  required>
+        </div>
+
+        <!-- Price Field -->
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" class="form-control" name="location" id="location" placeholder="Komasava" required>
+        </div>
+
+        <!-- Image Upload Field -->
+        <div class="form-group">
+          <label for="images">Images</label>
+          <input type="file" class="form-control" name="photo" id="images" required>
+        </div>
+
+        <!-- Multiple Image Preview Container -->
+        <div id="multiple-image-preview-container"></div>
+
+        <button type="submit" class="btn btn-success mt-3">Edit</button>
+      </form>
+    </div>
+  </div>
+
+{{-- End of edit overlay --}}
+
+
+{{-- Overlay script --}}
+
+<script>
+
+    function showUploadContainer() {
+      document.getElementById('edit').style.display = 'flex';
+    }
+
+    // Hide the overlay
+    function hideUploadContainer() {
+      document.getElementById('edit').style.display = 'none';
+    }
+</script>
+{{-- End of overlay Script --}}
+
 
     <script>
         // Get elements

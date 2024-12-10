@@ -19,6 +19,8 @@ class manufacturerController extends Controller
         $userId = Auth::id(); // Retrieves the logged-in user's ID
         $manufacturerId = Manufacturer::where('user_id', $userId)->value('id');
 
+        $profile_picture= Auth::user()->profile_picture;
+
     // Retrieve the materials belonging to the logged-in manufacturer
     $materials = material::where('manufacturer_id', $manufacturerId)
                          ->with('images') // Eager load the associated images
@@ -32,7 +34,7 @@ class manufacturerController extends Controller
     //   ]);
     // dd($materials);
 
-         return view('Manufacturer.index', compact('materials'));
+         return view('Manufacturer.index', compact('materials','profile_picture'));
     }
 
     
