@@ -34,7 +34,7 @@ class manufacturerController extends Controller
     //   ]);
     // dd($materials);
 
-         return view('Manufacturer.index', compact('materials','profile_picture'));
+         return view('Manufacturer.index12', compact('materials','profile_picture'));
     }
 
     

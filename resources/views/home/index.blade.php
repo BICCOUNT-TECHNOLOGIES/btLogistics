@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{{ asset('styles.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -27,7 +28,22 @@
     <nav>
 
       <a href="{{ route('about') }}"><i class="fas fa-info-circle"></i> About</a>
-      <a href="{{ route('register', 2) }}"><i class="fas fa-industry"></i> Become a Manufacturer</a>
+
+      <div class="dropdown ">
+        <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          USERS
+        </a>
+
+        <ul class="dropdown-menu ">
+          <li><a class="dropdown-item text-dark" href="#">Client</a></li>
+         
+          <li><a class="dropdown-item text-dark" href="#">Supplier</a></li>
+          <li><a class="dropdown-item text-dark" href="{{ route('register', 2) }}">Manufacturer</a></li>
+        </ul>
+
+      </div>
+
+      <a href="{{ route('register', 2) }}"><i class="fas fa-industry"></i> </a>
 
       {{-- <a href="{{ route('signup') }}"><i class="fas fa-truck-loading"></i> Become a Supplier</a> --}}
       <a href="about.html"><i class="fas fa-question-circle"></i> FAQ</a>
@@ -48,7 +64,7 @@
     <div class="content">
       <h1 style="color: black; font-weight: bold;">Effortless Transportation & E-commerce Solutions for your minerals</h1>
       <div class="buttons">
-        <button onclick="navigateTo('transportation')">GET TRANSPORTATION</button>
+        <button onclick="navig <li><a class="dropdown-item" href="#">Manufacturer</a></li>ateTo('transportation')">GET TRANSPORTATION</button>
         <button onclick="navigateTo('products')">GET PRODUCTS</button>
       </div>
     </div>
@@ -83,5 +99,9 @@ window.addEventListener("load", function () {
 });
 
   </script>
+
+<!-- Bootstrap JS and Popper.js (needed for dropdowns to work) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
