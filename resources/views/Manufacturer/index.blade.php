@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="{{ asset('styles.css') }}">
   <link rel="stylesheet" href="manufacturer/styles.css">
   <title>Murram Road Division</title>
-  {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
+   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> 
   <style>
     /* Sidebar Styles */
     .sidebar {
@@ -34,6 +34,9 @@
     .sidebar .add-material-btn:hover {
       background-color: #0056b3;
     }
+
+
+/* side bar styles */
 
     /* Header Styles */
     .header {
